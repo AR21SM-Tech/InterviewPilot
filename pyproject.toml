@@ -1,0 +1,74 @@
+[project]
+name = "interview-pilot"
+version = "0.1.0"
+description = "AI-powered voice interview coach with LiveKit and RAG"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+keywords = ["livekit", "interview", "ai", "voice", "rag", "langchain"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # LiveKit Voice Agent
+    "livekit-agents>=0.12.0",
+    "livekit-plugins-openai>=0.10.0",
+    "livekit-plugins-silero>=0.7.0",
+    
+    # RAG Pipeline
+    "langchain>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "langchain-chroma>=0.1.0",
+    "chromadb>=0.5.0",
+    
+    # Configuration
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    
+    # PDF Support (optional)
+    "pypdf>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+interview-pilot = "agent.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agent", "rag"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
