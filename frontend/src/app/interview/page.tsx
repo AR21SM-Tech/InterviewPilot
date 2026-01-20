@@ -56,7 +56,7 @@ function InterviewSession() {
     };
 
     // Agent Listening State Logic
-    const { participants } = useParticipants();
+    const participants = useParticipants();
     const { localParticipant } = useLocalParticipant();
     const agent = participants.find(p => !p.isLocal); // Assume the other person is the agent
 
